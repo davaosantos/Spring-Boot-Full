@@ -1,14 +1,25 @@
 package io.github.davaosantos.produtosapi.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 //POJO -> Plain Old Java Object
+
+@Entity(name = "produto")
 public class Produto {
 
+    @Id
+    @Column
     private String id;
 
+    @Column(name = "nome")
     private String nome;
 
+    @Column
     private String descricao;
 
+    @Column
     private Double preco;
 
     public String getId() {
