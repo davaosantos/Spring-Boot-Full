@@ -5,6 +5,7 @@ import io.github.davaosantos.produtosapi.model.Produto;
 import io.github.davaosantos.produtosapi.repository.ProdutoRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController //Classe vai receber requisicoes REST
@@ -26,23 +27,9 @@ public class ProdutoController {
         return produto;
     }
 
-    @GetMapping(name = "/{id}")
-    public Produto obterProduto(@PathVariable("id") String id){
-//        Optional<Produto> produtoOpt = produtoRepository.findById(id);
-        return produtoRepository.findById(id).orElse(null);
-    };
-
-    @DeleteMapping("/{id}")
-    public void deleteProduto(@PathVariable("id") String id){
-        produtoRepository.deleteById(id);
-    }
-
-    @PutMapping("/{id}")
-    public void atualizarProduto(
-            @PathVariable("id") String id,
-            @RequestBody Produto produto){
-        produto.setId(id);
-        produtoRepository.save(produto);
+    @GetMapping
+    public List<Produto> buscar(@RequestParam("nome") String nome){
+        return produtoRepository.findByNome(nome);
     }
 
 }
